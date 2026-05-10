@@ -34,10 +34,10 @@ export default function Sidebar() {
     <motion.aside
       animate={{ width: sidebarOpen ? 256 : 80 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="h-screen sticky top-0 glass border-r border-white/20 dark:border-slate-700/30 flex flex-col z-30 backdrop-blur-2xl"
+      className="h-screen sticky top-0 glass border-r border-white/20 dark:border-dark-700/50 flex flex-col z-30 backdrop-blur-2xl"
     >
       {/* Logo */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-white/20 dark:border-slate-700/30">
+      <div className="flex items-center justify-between h-16 px-4 border-b border-white/20 dark:border-dark-700/50">
         {sidebarOpen && (
           <div className="flex items-center gap-2">
             <Hexagon size={24} className="text-primary-500" />
@@ -48,7 +48,7 @@ export default function Sidebar() {
         )}
         <button
           onClick={toggleSidebar}
-          className="p-2 rounded-xl hover:bg-white/20 dark:hover:bg-slate-800 transition-colors"
+          className="p-2 rounded-xl hover:bg-white/20 dark:hover:bg-dark-700/50 transition-colors"
           aria-label="Toggle sidebar"
         >
           <ChevronLeft
@@ -69,7 +69,7 @@ export default function Sidebar() {
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative',
                 isActive
                   ? 'sidebar-link font-medium'
-                  : 'text-gray-600 dark:text-gray-400 hover:bg-white/20 dark:hover:bg-slate-800',
+                  : 'text-gray-600 dark:text-slate-400 hover:bg-white/20 dark:hover:bg-dark-700/40',
                 !sidebarOpen && 'justify-center'
               )
             }
@@ -78,18 +78,13 @@ export default function Sidebar() {
             {sidebarOpen && (
               <span className="text-sm whitespace-nowrap">{item.label}</span>
             )}
-            {!sidebarOpen && (
-              <span className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                {item.label}
-              </span>
-            )}
           </NavLink>
         ))}
       </nav>
 
       {/* Footer */}
       {sidebarOpen && (
-        <div className="p-4 border-t border-white/20 dark:border-slate-700/30 text-xs text-gray-400"> 
+        <div className="p-4 border-t border-white/20 dark:border-dark-700/50 text-xs text-gray-400 dark:text-slate-500">
           NexusFlow v1.0 · Premium
         </div>
       )}
