@@ -29,11 +29,6 @@ export default function CommandPalette({ isOpen, onClose }) {
     }
   }, [isOpen, onClose]);
 
-  const handleSelect = (path) => {
-    navigate(path);
-    onClose();
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -41,7 +36,7 @@ export default function CommandPalette({ isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-black/30 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-black/30 dark:bg-black/50 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
@@ -49,33 +44,33 @@ export default function CommandPalette({ isOpen, onClose }) {
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: -20 }}
             onClick={(e) => e.stopPropagation()}
-            className="glass rounded-2xl w-full max-w-lg overflow-hidden"
+            className="glass dark:bg-dark-800/90 dark:border-dark-700/50 rounded-2xl w-full max-w-lg overflow-hidden"
           >
-            <div className="flex items-center p-4 border-b border-white/10">
-              <Search size={18} className="text-gray-400 mr-2" />
+            <div className="flex items-center p-4 border-b border-white/10 dark:border-dark-700/50">
+              <Search size={18} className="text-gray-400 dark:text-slate-500 mr-2" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command or search..."
-                className="bg-transparent flex-1 outline-none text-sm"
+                className="bg-transparent flex-1 outline-none text-sm dark:text-slate-200 placeholder-gray-400 dark:placeholder-slate-500"
               />
-              <kbd className="text-xs text-gray-400 bg-white/5 px-2 py-0.5 rounded">esc</kbd>
+              <kbd className="text-xs text-gray-400 dark:text-slate-500 bg-white/5 dark:bg-dark-700/50 px-2 py-0.5 rounded">esc</kbd>
             </div>
             <ul className="max-h-64 overflow-auto p-2">
               {filtered.map((cmd) => (
                 <li key={cmd.path}>
                   <button
-                    onClick={() => handleSelect(cmd.path)}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/10 transition text-left"
+                    onClick={() => { navigate(cmd.path); onClose(); }}
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/10 dark:hover:bg-dark-700/40 transition text-left"
                   >
                     <span>{cmd.name}</span>
-                    <span className="text-xs text-gray-400">{cmd.shortcut}</span>
+                    <span className="text-xs text-gray-400 dark:text-slate-500">{cmd.shortcut}</span>
                   </button>
                 </li>
               ))}
               {filtered.length === 0 && (
-                <li className="px-4 py-3 text-sm text-gray-400">No results found.</li>
+                <li className="px-4 py-3 text-sm text-gray-400 dark:text-slate-500">No results found.</li>
               )}
             </ul>
           </motion.div>
