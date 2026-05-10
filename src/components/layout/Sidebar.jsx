@@ -89,7 +89,7 @@ export default function Sidebar() {
 
       {/* Footer */}
       {sidebarOpen && (
-        <div className="p-4 border-t border-white/20 dark:border-slate-700/30 text-xs text-gray-400">
+        <div className="p-4 border-t border-white/20 dark:border-slate-700/30 text-xs text-gray-400"> 
           NexusFlow v1.0 · Premium
         </div>
       )}
