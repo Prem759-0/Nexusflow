@@ -1,6 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, StickyNote, ListTodo, Columns, Calendar, BarChart3, Timer, Settings, ChevronLeft } from 'lucide-react';
+import {
+  LayoutDashboard,
+  StickyNote,
+  ListTodo,
+  Columns,
+  Calendar,
+  BarChart3,
+  Timer,
+  Settings,
+  ChevronLeft,
+  Hexagon,
+} from 'lucide-react';
 import useSettingsStore from '../../stores/useSettingsStore';
 import { cn } from '../../lib/utils';
 
@@ -21,37 +32,65 @@ export default function Sidebar() {
 
   return (
     <motion.aside
-      animate={{ width: sidebarOpen ? 240 : 72 }}
+      animate={{ width: sidebarOpen ? 256 : 80 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="h-screen sticky top-0 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-gray-200 dark:border-slate-800 flex flex-col z-30"
+      className="h-screen sticky top-0 glass border-r border-white/20 dark:border-slate-700/30 flex flex-col z-30 backdrop-blur-2xl"
     >
-      <div className="flex items-center justify-between p-4 h-16 border-b border-gray-200 dark:border-slate-800">
-        {sidebarOpen && <span className="text-xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">NexusFlow</span>}
-        <button onClick={toggleSidebar} className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-800 transition">
-          <ChevronLeft size={20} className={cn('transition', !sidebarOpen && 'rotate-180')} />
+      {/* Logo */}
+      <div className="flex items-center justify-between h-16 px-4 border-b border-white/20 dark:border-slate-700/30">
+        {sidebarOpen && (
+          <div className="flex items-center gap-2">
+            <Hexagon size={24} className="text-primary-500" />
+            <span className="text-lg font-bold bg-gradient-to-r from-primary-500 to-purple-500 bg-clip-text text-transparent">
+              NexusFlow
+            </span>
+          </div>
+        )}
+        <button
+          onClick={toggleSidebar}
+          className="p-2 rounded-xl hover:bg-white/20 dark:hover:bg-slate-800 transition-colors"
+          aria-label="Toggle sidebar"
+        >
+          <ChevronLeft
+            size={18}
+            className={cn('transition-transform', !sidebarOpen && 'rotate-180')}
+          />
         </button>
       </div>
-      <nav className="flex-1 py-4 space-y-1 px-2">
+
+      {/* Navigation */}
+      <nav className="flex-1 py-6 px-3 space-y-1">
         {navItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all group',
-                isActive ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-800',
+                'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative',
+                isActive
+                  ? 'sidebar-link font-medium'
+                  : 'text-gray-600 dark:text-gray-400 hover:bg-white/20 dark:hover:bg-slate-800',
                 !sidebarOpen && 'justify-center'
               )
             }
           >
-            <item.icon size={20} />
-            {sidebarOpen && <span className="text-sm font-medium">{item.label}</span>}
+            <item.icon size={20} className="flex-shrink-0" />
+            {sidebarOpen && (
+              <span className="text-sm whitespace-nowrap">{item.label}</span>
+            )}
+            {!sidebarOpen && (
+              <span className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                {item.label}
+              </span>
+            )}
           </NavLink>
         ))}
       </nav>
+
+      {/* Footer */}
       {sidebarOpen && (
-        <div className="p-4 border-t border-gray-200 dark:border-slate-800 text-xs text-gray-400">
-          NexusFlow v1.0
+        <div className="p-4 border-t border-white/20 dark:border-slate-700/30 text-xs text-gray-400">
+          NexusFlow v1.0 · Premium
         </div>
       )}
     </motion.aside>
