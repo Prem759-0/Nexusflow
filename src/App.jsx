@@ -59,7 +59,7 @@ export default function App() {
       <BrowserRouter>
         <CustomCursor />
         <AppRoutes />
-        <Toaster
+       <Toaster
   position="bottom-right"
   toastOptions={{
     style: {
@@ -70,6 +70,7 @@ export default function App() {
       border: '1px solid rgba(255,255,255,0.3)',
       boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
     },
+    className: 'dark:!bg-dark-800/80 dark:!text-slate-200 dark:!border-dark-700/50',
   }}
 />
       </BrowserRouter>
