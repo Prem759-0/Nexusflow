@@ -6,42 +6,69 @@
   body {
     @apply font-sans antialiased;
   }
-  .glass {
-    @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
   }
-  .neo {
-    @apply shadow-neo dark:shadow-neo-dark;
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-slate-700 rounded-full;
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Glassmorphism enhancement */
+.glass {
+  @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-slate-700/30;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
-::-webkit-scrollbar-track {
-  @apply bg-transparent;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+.dark .glass {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Noise background overlay */
-.noise-bg::before {
+.glass-hover:hover {
+  @apply bg-white/80 dark:bg-slate-900/80;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Neumorphism */
+.neo {
+  @apply shadow-neo dark:shadow-neo-dark;
+}
+
+/* Animated background gradient */
+.animated-bg {
+  background: linear-gradient(135deg, #f0f4ff, #e8ecff, #f3e8ff, #e8f0ff);
+  background-size: 400% 400%;
+  animation: bg-shift 15s ease infinite;
+}
+.dark .animated-bg {
+  background: linear-gradient(135deg, #0b1120, #111827, #0f172a, #0b1120);
+  background-size: 400% 400%;
+}
+
+/* Noise overlay for texture */
+.noise-overlay::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-image: url('/src/assets/noise.png');
-  opacity: 0.03;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Custom cursor global */
-body {
-  cursor: none;
+/* Active link indicator */
+.sidebar-link.active {
+  @apply bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400;
 }
-@media (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
+
+/* Hover glow for interactive elements */
+.glow-on-hover {
+  transition: box-shadow 0.3s ease;
+}
+.glow-on-hover:hover {
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
 }
