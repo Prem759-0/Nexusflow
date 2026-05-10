@@ -1,8 +1,16 @@
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
-export default function Button({ children, variant = 'primary', size = 'md', className, ...props }) {
-  const base = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50';
+export default function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  className,
+  leftIcon,       // added
+  ...props
+}) {
+  const base =
+    'inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50';
   const variants = {
     primary: 'bg-indigo-600 hover:bg-indigo-700 text-white neo dark:shadow-neo-dark',
     secondary: 'glass hover:bg-white/20',
@@ -19,6 +27,7 @@ export default function Button({ children, variant = 'primary', size = 'md', cla
       className={cn(base, variants[variant], sizes[size], className)}
       {...props}
     >
+      {leftIcon}
       {children}
     </motion.button>
   );
