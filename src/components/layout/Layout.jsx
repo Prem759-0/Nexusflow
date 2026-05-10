@@ -1,9 +1,11 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom'; // add useLocation
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Layout() {
+  const location = useLocation(); // get location
+
   return (
     <div className="flex h-screen overflow-hidden relative noise-bg">
       <Sidebar />
