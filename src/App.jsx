@@ -59,7 +59,19 @@ export default function App() {
       <BrowserRouter>
         <CustomCursor />
         <AppRoutes />
-        <Toaster position="bottom-right" toastOptions={{ style: { background: 'var(--tw-bg-opacity, #1e293b)', color: '#f1f5f9' } }} />
+        <Toaster
+  position="bottom-right"
+  toastOptions={{
+    style: {
+      background: 'rgba(255,255,255,0.8)',
+      backdropFilter: 'blur(16px)',
+      color: '#0f172a',
+      borderRadius: '16px',
+      border: '1px solid rgba(255,255,255,0.3)',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+    },
+  }}
+/>
       </BrowserRouter>
     </ErrorBoundary>
   );
